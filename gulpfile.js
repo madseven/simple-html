@@ -1,25 +1,25 @@
-const {src, dest, watch, parallel, series} = require('gulp'),
-	scss = require ('gulp-sass') (require ('sass')),
-	concat = require('gulp-concat'),
-	browserSync = require('browser-sync').create(),
-	uglify = require('gulp-uglify-es').default,
-	autoprefixer = require('gulp-autoprefixer'),
-	// imagemin = require('gulp-imagemin'),
-	del = require('del'),
-	webp = require('gulp-webp'),
-	group_media = require('gulp-group-css-media-queries'),
-	clean_css = require('gulp-clean-css'),
-	twig = require('gulp-twig'),
-	babel = require('gulp-babel'),
-	webpack = require('webpack-stream'),
-	minify = require('gulp-babel-minify'),
-	sourcemaps = require('gulp-sourcemaps');
+const {src, dest, watch, parallel, series} = require('gulp')
+const scss = require ('gulp-sass') (require ('sass'))
+const concat = require('gulp-concat')
+const browserSync = require('browser-sync').create()
+const autoprefixer = require('gulp-autoprefixer')
+const del = require('del')
+const group_media = require('gulp-group-css-media-queries')
+const clean_css = require('gulp-clean-css')
+const twig = require('gulp-twig')
+const babel = require('gulp-babel')
+const webpack = require('webpack-stream')
+const minify = require('gulp-babel-minify')
+const sourcemaps = require('gulp-sourcemaps')
+const port = 3000
+const mode_start = false
+const mode_nuxt = true
 
 function browsersync() {
 	browserSync.init({
 		server: {
 			baseDir: 'dist/',
-			port: 3000,
+			port,
 			notify: false
 		}
 	});
@@ -31,22 +31,6 @@ function clean() {
 
 function assets() {
 	return src('src/assets/**/*')
-		// .pipe(imagemin([
-		// 	imagemin.gifsicle({interlaced: true}),
-		// 	imagemin.mozjpeg({quality: 75, progressive: true}),
-		// 	imagemin.optipng({optimizationLevel: 5}),
-		// 	imagemin.svgo({
-		// 		plugins: [
-		// 			{removeViewBox: true},
-		// 			{cleanupIDs: false}
-		// 		]
-		// 	})
-		// ]))
-		// .pipe(
-		// 	webp({
-		// 		quality: 70
-		// 	})
-		// )	
 		.pipe(dest('dist/assets'))
 		.pipe(browserSync.stream())
 }
@@ -55,7 +39,7 @@ let webpack_config = {
     output: {
         filename: 'script.js'
     },
-    mode: 'development',
+    mode: !mode_start ? 'development' : 'production',
     devtool: 'eval-source-map'
 }
 
@@ -72,36 +56,17 @@ function js() {
             removeConsole: true,
             removeDebugger: true
         }))
-        .pipe(sourcemaps.write('.'))
+        .pipe(sourcemaps.write())
         .pipe(dest('dist/js'))
         .pipe(browserSync.stream())
 }
 
-// function js() {
-// 	function js() {
-// 	src(['src/js/*.js', '!src/js/script.js'])
-// 		.pipe(dest('dist/js'))
-
-// 	return src([
-// 		'src/js/script.js'
-// 	])
-// 	.pipe(concat('script.min.js'))
-// 	.pipe(uglify())
-// 	.pipe(dest('dist/js'))
-// 	.pipe(browserSync.stream())
-// }
-
-// 	return src([
-// 		'src/js/*.js'
-// 	])
-// 	.pipe(concat('script.min.js'))
-// 	.pipe(uglify())
-// 	.pipe(dest('dist/js'))
-// 	.pipe(browserSync.stream())
-// }
 
 function css() {
-	return src('src/scss/style.scss')
+	let set;
+
+	if (!mode_nuxt) {
+		set = src('src/assets/scss/style.scss')
 		.pipe(scss({
 			outputStyle: 'expanded'
 		}))
@@ -115,12 +80,23 @@ function css() {
 		}))
 		.pipe(clean_css())
 		.pipe(concat('style.min.css'))
-		.pipe(dest('dist/css'))
+		.pipe(dest('dist/assets/css'))
 		.pipe(browserSync.stream())
+	} else {
+		set = src('src/assets/scss/style.scss')
+		.pipe(scss({
+			outputStyle: 'expanded'
+		}))
+		.pipe(clean_css())
+		.pipe(concat('style.min.css'))
+		.pipe(dest('dist/assets/css'))
+		.pipe(browserSync.stream())
+	}
+	return set
 }
 
 function html() {
-	return src('src/pages/*.html')
+	return src(['src/pages/!(_*).html'])
         .pipe(twig({
             data: {
                 title: 'Gulp and Twig',
@@ -137,15 +113,15 @@ function html() {
 
 function build() {
 	return src([
-		'src/fonts/**/*',
+		'src/assets/fonts/**/*',
 	], {base: 'src'}) 
-		.pipe(dest('dist'))
+		.pipe(dest('dist/assets'))
 }
 
 function watchFiles() {
-	watch(['src/scss/**/*.scss'], css)
-	watch(['src/js/**/*.js', '!src/js/script.min.js'], js)	
-	watch(['src/pages/**/*.html'], html)
+	watch(['src/assets/scss/**/*'], css)
+	watch(['src/js/**/*.js'], js)	
+	watch(['!src/pages/_start-page.html', 'src/pages/**/*'], html)
 	watch(['src/assets/**/*'], assets)
 }
 
