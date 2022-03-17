@@ -55,3 +55,30 @@ body.lock {
     flex: 0 0 auto;
   }
 }
+
+.container {
+  max-width: 1220px;
+  padding: 0 20px;
+  margin: 0 auto;
+  min-width: 320px;
+}
+
+.top-line {
+  &__inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding-top: 55px;
+    padding-bottom: 55px;
+
+    @media (max-width: 992px) {
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+  }
+  .menu {
+    display: none;
+  }
+  .menu-btn {
+    display: none;
+  }
+}
