@@ -13,7 +13,7 @@ const minify = require('gulp-babel-minify')
 const sourcemaps = require('gulp-sourcemaps')
 const port = 3000
 const mode_start = false
-const mode_nuxt = true
+const mode_nuxt = false
 
 function browsersync() {
 	browserSync.init({

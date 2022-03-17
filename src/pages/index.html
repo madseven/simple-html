@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% include 'components/head.html' %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;800&family=Roboto&display=swap" rel="stylesheet">
 <head>
     
 </head>
 <body>
-    <!-- Class "index-page ($-page)" обязательный и уникальный для каждой страницы -->
     <div class="site index-page">
         <div class="site-top">
-            <!-- Удалить! -->
-                {% include 'components/start-block.html' %}
-            <!-- // Удалить! --> 
+            {% include "components/top-line.html" %}
         </div>
         <div class="site-bottom">
             {% include 'components/Footer/index.html' %}
