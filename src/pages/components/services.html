@@ -1,0 +1,41 @@
+{%
+    set features = [
+        {
+            image: '1.svg',
+            title: 'Регистрация ООО и ИП',
+            desc: 'Быстрая регистрация юридического лица и открытие банковского счета'
+        },
+        {
+            image: '2.svg',
+            title: 'Бухгалтерский учёт',
+            desc: 'Профессиональное бухгалтерское сопровождение для любых типов юридических лиц'
+        },
+        {
+            image: '3.svg',
+            title: 'Ликвидация',
+            desc: 'Профессиональная безопасная ликвидация юридических лиц'
+        },
+        {
+            image: '4.svg',
+            title: 'Перерегистрация',
+            desc: 'Внесение изменений в учредительные документы, смена состава и изменение долей'
+        },
+    ]    
+%}
+
+<section class="features">
+    <div class="container">
+        <div class="features__inner">
+            <div class="swiper swiper-grid">
+                <div class="swiper-wrapper">
+                    {% for feature in features %}
+                        <div class="swiper-slide">
+                            {% include "templates/feature.html" %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

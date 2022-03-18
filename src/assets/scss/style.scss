@@ -1,4 +1,6 @@
 @import "../../../node_modules/normalize.css/normalize.css";
+@import "../../../node_modules/swiper/swiper.scss";
+@import "../../../node_modules/swiper/swiper-vars.scss";
 @import "vars.scss";
 
 *,
@@ -244,6 +246,11 @@ body.lock {
 }
 
 .header {
+  margin-bottom: 250px;
+
+  @media (max-width: 992px) {
+    margin-bottom: 100px;
+  }
   &__inner {
     display: flex;
     align-items: flex-end;
@@ -416,5 +423,122 @@ body.lock {
     font-size: 14px;
     line-height: 16px;
     padding: 15px 25px;
+  }
+}
+
+.feature {
+  padding-top: 75px;
+  padding-left: 30px;
+  padding-right: 20px;
+  padding-bottom: 90px;
+  border: 1px solid $accent-color;
+  height: 100%;
+
+  @media (max-width: 992px) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .button {
+    display: none;
+    width: 100%;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 15px 30px;
+    text-align: center;
+    margin-top: auto;
+
+    @media (max-width: 992px) {
+      display: block;
+    }
+  }
+
+  @media (max-width: 992px) {
+    padding-top: 35px;
+    padding-right: 30px;
+    padding-bottom: 35px;
+  }
+
+  @media (max-width: 1200px) {
+    margin-bottom: 0;
+  }
+  &__image {
+    height: 110px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left center;
+    margin-bottom: 45px;
+
+    @media (max-width: 992px) {
+      height: 90px;
+      margin-bottom: 30px;
+    }
+  }
+  h3 {
+    display: flex;
+    align-items: flex-end;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 28px;
+    color: $card-color-text;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid $accent-color;
+    min-height: 70px;
+
+    @media (max-width: 992px) {
+      font-size: 18px;
+      line-height: 21px;
+      align-items: flex-start;
+      min-height: 45px;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+  }
+  p {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    color: $card-color-text;
+
+    @media (max-width: 992px) {
+      font-size: 13px;
+      line-height: 15px;
+    }
+  }
+}
+
+.swiper {
+  @media (max-width: 1200px) {
+    overflow: initial;
+  }
+  .swiper-wrapper {
+    align-items: stretch;
+
+    .swiper-slide {
+      min-height: 100%;
+      height: auto;
+    }
+  }
+  &.swiper-grid {
+    .swiper-wrapper {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+
+      @media (max-width: 1200px) {
+        display: flex;
+      }
+
+      @media (min-width: 1201px) {
+        transform: none !important;
+      }
+    }
+    .swiper-slide {
+      padding-bottom: 20px;
+
+      @media (max-width: 1200px) {
+        padding-bottom: 0;
+      }
+    }
   }
 }
