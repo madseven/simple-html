@@ -74,11 +74,171 @@ body.lock {
       padding-top: 50px;
       padding-bottom: 50px;
     }
+
+    @media (max-width: 992px) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    & > address,
+    & .top-line__phone {
+      align-self: center;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 21px;
+      font-style: normal;
+      text-decoration: none;
+      color: $defalt-color-text;
+      font-family: "Roboto", Arial, Helvetica, sans-serif;
+
+      @media (max-width: 992px) {
+        font-size: 16px;
+        line-height: 19px;
+      }
+
+      @media (max-width: 767px) {
+        display: none;
+      }
+    }
+    & > address {
+      padding-right: 40px;
+    }
+    .top-line__phone {
+      justify-self: end;
+      transition: color 0.25s ease;
+      padding-left: 40px;
+
+      &:hover {
+        color: $accent-color;
+      }
+    }
+  }
+  & picture {
+    justify-self: center;
   }
   .menu {
-    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $accent-color;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-top: 150px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    padding-right: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 100;
+    transform: translateY(-150%);
+    transition: transform 0.25s ease;
+
+    &--active {
+      transform: translateY(0);
+    }
+
+    &__logo {
+      max-width: 155px;
+      height: auto;
+      margin-bottom: 50px;
+    }
+    & address,
+    &__mail,
+    &__phone {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 19px;
+      font-style: normal;
+      text-decoration: none;
+      color: #fff;
+      margin-bottom: 20px;
+      z-index: 10;
+    }
+    address {
+      margin-bottom: 0;
+    }
+    .coin-1 {
+      position: absolute;
+      width: 68px;
+      height: 68px;
+      left: -27px;
+      top: 21px;
+      transform: rotate(20deg);
+    }
+    .coin-2 {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      right: -30px;
+      top: 563px;
+      transform: rotate(265deg);
+    }
+    .calc-1 {
+      position: absolute;
+      width: 80px;
+      height: 90px;
+      left: -27px;
+      top: 481px;
+    }
+    .calc-2 {
+      position: absolute;
+      width: 80px;
+      height: 90px;
+      right: -50px;
+      top: 280px;
+    }
+    .clock {
+      position: absolute;
+      width: 81px;
+      height: 71px;
+      left: 117px;
+      bottom: -40px;
+    }
   }
   .menu-btn {
     display: none;
+
+    @media (max-width: 767px) {
+      position: relative;
+      display: block;
+      width: 40px;
+      height: 22px;
+      background: none;
+      border: none;
+      padding: 0;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        width: 40px;
+        border-top: 1px solid #000;
+        transition: all 0.25s ease;
+        transition-property: transform, bottom, top;
+      }
+      &::before {
+        top: 0;
+      }
+      &::after {
+        bottom: 0;
+      }
+
+      &--active {
+        z-index: 105;
+        &::before {
+          transform: rotate(-45deg);
+          top: 10px;
+        }
+        &::after {
+          transform: rotate(45deg);
+          bottom: 11px;
+        }
+      }
+    }
   }
 }
