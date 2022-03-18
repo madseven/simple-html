@@ -242,3 +242,179 @@ body.lock {
     }
   }
 }
+
+.header {
+  &__inner {
+    display: flex;
+    align-items: flex-end;
+
+    @media (max-width: 992px) {
+      align-items: center;
+    }
+
+    @media (max-width: 767px) {
+      padding-top: 105px;
+      position: relative;
+    }
+
+    & > .coin {
+      display: none;
+
+      @media (max-width: 767px) {
+        display: block;
+      }
+    }
+    .cloud {
+      display: none;
+      position: absolute;
+      top: 10px;
+      right: -100px;
+      z-index: -1;
+      width: 355px;
+
+      @media (max-width: 767px) {
+        display: block;
+      }
+    }
+  }
+  &__info {
+    @media (max-width: 767px) {
+      max-width: 450px;
+      z-index: 10;
+    }
+  }
+  &__image {
+    position: relative;
+    flex-shrink: 0;
+    flex-basis: 51%;
+    align-self: flex-start;
+    margin-left: 25px;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
+
+    &-bank {
+      width: 100%;
+      height: auto;
+    }
+    .coin-bank {
+      position: absolute;
+
+      &-1 {
+        position: absolute;
+        width: 17%;
+        height: auto;
+        left: 35%;
+        top: 6%;
+      }
+      &-2 {
+        width: 17%;
+        height: auto;
+        left: 24%;
+        top: 19%;
+        transform: rotate(100deg);
+      }
+      &-3 {
+        width: 17%;
+        height: auto;
+        left: 35%;
+        top: 32.5%;
+        transform: rotate(37deg);
+      }
+    }
+  }
+  h1 {
+    font-weight: 800;
+    font-size: 64px;
+    line-height: 75px;
+    color: $defalt-color-text;
+    margin-top: 0;
+    margin-bottom: 50px;
+
+    @media (max-width: 992px) {
+      font-size: 36px;
+      line-height: 42px;
+      margin-bottom: 20px;
+    }
+  }
+  p {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    margin-bottom: 20px;
+    color: $submain-color-text;
+    &:last-of-type {
+      margin-bottom: 100px;
+    }
+    @media (max-width: 992px) {
+      font-size: 16px;
+      line-height: 19px;
+      padding-right: 30px;
+      &:last-of-type {
+        margin-bottom: 45px;
+      }
+    }
+  }
+  .coin {
+    position: absolute;
+    &-1 {
+      width: 75px;
+      height: 75px;
+      left: -53px;
+      top: 20px;
+      transform: rotate(70deg);
+    }
+    &-2 {
+      width: 60px;
+      height: 60px;
+      right: 90px;
+      top: -2%;
+      transform: rotate(162deg);
+    }
+    &-3 {
+      width: 92px;
+      height: 92px;
+      right: -63px;
+      top: 21%;
+      transform: rotate(70deg);
+    }
+    &-4 {
+      top: 75%;
+      left: -53px;
+      width: 60px;
+      height: 60px;
+      transform: rotate(20deg);
+    }
+    &-5 {
+      width: 60px;
+      height: 60px;
+      right: -15px;
+      top: 67%;
+    }
+  }
+}
+
+.button {
+  display: inline-block;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 29px;
+  color: $accent-color;
+  padding: 30px 45px;
+  border: 1px solid $accent-color;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  transition-property: background, color;
+
+  &:hover {
+    color: #fff;
+    background: $accent-color;
+  }
+
+  @media (max-width: 992px) {
+    font-size: 14px;
+    line-height: 16px;
+    padding: 15px 25px;
+  }
+}
